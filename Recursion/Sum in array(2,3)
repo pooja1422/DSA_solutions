@@ -1,0 +1,94 @@
+##Pair sum in array
+1
+9
+1 3 6 2 5 4 3 2 4
+7
+Sample Output 1:
+7
+
+public class Solution {	
+
+	public static int pairSum(int[] arr, int num) {
+		//Your code goes here
+        int count=0;
+        for(int i=0;i<arr.length;i++)
+       { 
+        for(int j=i+1;j<arr.length;j++)
+        {
+
+
+            if(arr[i]+arr[j]==num)
+            {
+                count+=1;
+            }
+        }
+    }
+        return count;
+
+	}
+}
+
+##Triplet sum
+Sample Input 1:
+1
+7
+1 2 3 4 5 6 7 
+12
+Sample Output 1:
+5
+
+import java.util.*;
+public class Solution {	
+
+	public static int tripletSum(int[] arr, int num){
+
+        Arrays.sort(arr);
+        int n=arr.length;
+        int numTriplets=0;
+    	for (int i = 0;  i < n ; i++)  { 
+    	int pairSumFor = num-arr[i];
+		int numPairs = pairSum(arr,i+1,n-1,pairSumFor);
+		numTriplets+=numPairs;
+	}
+		return numTriplets;
+}
+    
+        private static int pairSum(int []arr,int si,int ei,int num){
+        	Arrays.sort(arr);
+    		int numpair=0;
+    		while(si<ei) {
+    			if(arr[si]+arr[ei]<num) {
+    				si++;
+    			}
+    			else if(arr[si]+arr[ei]>num) {
+    				ei--;
+    			}
+    			else {
+    				int elementAtStart= arr[si];
+    				int elementAtEnd= arr[ei];
+    				if(elementAtStart==elementAtEnd) {
+    					int totalElementsfromStarttoEnd= ei-si+1;
+    					numpair+= (totalElementsfromStarttoEnd)*(totalElementsfromStarttoEnd-1)/2;
+    					return numpair;
+    				}
+    				int tempSi=si+1;
+    				int tempEi= ei-1;
+    				while(tempSi<=tempEi && arr[tempSi]==elementAtStart) {
+    					tempSi++;
+    				}
+    				while(tempEi>=tempSi && arr[tempEi]==elementAtEnd) {
+    					tempEi--;
+    				}
+    				int totalElementsfromStart= (tempSi-si);
+    				int totalElementsfromEnd= (ei-tempEi);
+    				numpair+=(totalElementsfromStart)*(totalElementsfromEnd);
+    				si= tempSi;
+    				ei= tempEi;
+    				
+    			}
+    		}
+    		return numpair;
+        }
+
+}
+
