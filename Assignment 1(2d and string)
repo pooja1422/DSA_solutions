@@ -1,0 +1,144 @@
+##Remove Consecutive Duplicates
+Send Feedback
+For a given string(str), remove all the consecutive duplicate characters.
+Example:
+Input String: "aaaa"
+Expected Output: "a"
+
+Input String: "aabbbcc"
+Expected Output: "abc"
+
+
+public class Solution {
+
+	public static String removeConsecutiveDuplicates(String str) {
+		//Your code goes here
+        String op="";
+        char a[]=str.toCharArray();
+        op=op+a[0];
+        char first=a[0];
+        for(int i=0;i<a.length;i++){
+            char ch = a[i];
+            if(ch!=first){
+                op+=a[i];
+                first=a[i];
+            }
+        }
+        return op;
+	}
+
+}
+
+##Reverse Each Word
+Send Feedback
+Aadil has been provided with a sentence in the form of a string as a function parameter. The task is to implement a function so as to print the sentence such that each word in the sentence is reversed.
+Example:
+Input Sentence: "Hello, I am Aadil!"
+The expected output will print, ",olleH I ma !lidaA".
+
+public class Solution {
+
+	public static String reverseEachWord(String str) {
+		//Your code goes here
+        // String s[] = str.split(" ");
+        String ans = "";
+        int m=-1;
+        int i=0;
+        for (; i<str.length();i++)
+        {
+            if(str.charAt(i)==' ')
+            {ans+= reverse(m+1,i,str);
+            m=i;
+             ans+=" ";
+            }
+            // char c[]=s[i].toCharArray();
+            // for(int j=c.length-1;j>=0;j--){    
+            // ans += c[j];
+        }
+            ans+= reverse(m+1,i,str);
+        
+            
+        return ans;
+	}
+public static String reverse(int i,int j,String str)
+{
+    String reversed="";
+    while(i<j)
+    {
+        reversed= str.charAt(i)+reversed;
+        i++;
+    }
+    return reversed;
+    
+}
+}
+
+##Highest Occuring Character
+Send Feedback
+For a given a string(str), find and return the highest occurring character.
+Example:
+Input String: "abcdeapapqarr"
+Expected Output: 'a'
+Since 'a' has appeared four times in the string which happens to be the highest frequency character, the answer would be 'a'.
+If there are two characters in the input string with the same frequency, return the character which comes first.
+
+public class Solution {
+
+	public static char highestOccuringChar(String str) {
+		//Your code goes here
+        int freq[]=new int[256];
+        for(int i=0;i<str.length();i++){
+            freq[str.charAt(i)]++;
+        }
+        int max = -1;
+        char result = ' '; 
+        for(int j=0;j<str.length();j++){
+            if (max < freq[str.charAt(j)]) {
+                max = freq[str.charAt(j)];
+                result = str.charAt(j);
+        }
+    }
+            return result;
+	}
+
+}
+
+##Compress the String
+Send Feedback
+Write a program to do basic string compression. For a character which is consecutively repeated more than once, replace consecutive duplicate occurrences with the count of repetitions.
+Example:
+If a string has 'x' repeated 5 times, replace this "xxxxx" with "x5".
+
+The string is compressed only when the repeated character count is more than 1.
+Note:
+Consecutive count of every character in the input string is less than or equal to 9.
+
+public class Solution {
+
+	public static String getCompressedString(String str) {
+		//Your code goes here
+        // char s=str.charAt(0);
+        int count=1;
+        String op="";
+        op+=str.charAt(0);
+        for(int i=1;i<str.length();i++){
+    		if(str.charAt(i)==str.charAt(i -1 )){
+                count++;
+            }
+            else{
+                if(count>1){
+                op+=count;
+                }
+                op = op + str.charAt(i);
+                count = 1;
+            }
+           
+        }
+        if(count > 1){
+            op = op + count;
+        }
+    return op;
+        
+	}
+
+}
