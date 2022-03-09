@@ -28,6 +28,48 @@ Sample Input 2 :
 5 4 3 2 1
 Sample Output 2 :
 5 4 4 3 3
+##Main code:
+public class Runner {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    
+    public static int[] takeInput() throws IOException {
+        int size = Integer.parseInt(br.readLine().trim());
+        int[] input = new int[size];
+
+        if (size == 0) {
+            return input;
+        }
+        
+		String[] strNums;
+		strNums = br.readLine().split("\\s");
+		
+        for (int i = 0; i < size; ++i) {
+            input[i] = Integer.parseInt(strNums[i]);
+        }
+
+        return input;
+    }
+
+    public static void printArray(int[] arr) {
+        for (int element : arr) {
+            System.out.print(element + " ");
+        }
+
+        System.out.println();
+    }
+
+    public static void main(String[] args) throws NumberFormatException, IOException {
+
+
+        int[] arr = takeInput();
+        Solution.findMedian(arr);
+
+
+    }
+}
+
+function code:
 
 import java.util.Collections;
 import java.util.Comparator;
