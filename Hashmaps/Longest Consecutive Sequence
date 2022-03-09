@@ -1,0 +1,81 @@
+You are given an array of unique integers that contain numbers in random order. You have to find the longest possible sequence of consecutive numbers using the numbers from given array.
+You need to return the output array which contains starting and ending element. If the length of the longest possible sequence is one, then the output array must contain only single element.
+Note:
+1. Best solution takes O(n) time.
+2. If two sequences are of equal length, then return the sequence starting with the number whose occurrence is earlier in the array.
+Input format:
+The first line of input contains an integer, that denotes the value of the size of the array. Let us denote it with the symbol n.
+The following line contains n space separated integers, that denote the value of the elements of the array.
+Output format:
+The first and only line of output contains starting and ending element of the longest consecutive sequence. If the length of longest consecutive sequence, then just print the starting element.
+Constraints :
+0 <= n <= 10^6
+Time Limit: 1 sec
+Sample Input 1 :
+13
+2 12 9 16 10 5 3 20 25 11 1 8 6 
+Sample Output 1 :
+8 12 
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class Solution {
+	public static ArrayList<Integer> longestConsecutiveIncreasingSequence(int[] arr) {
+		/* Your class should be named Solution
+		 * Don't write main().
+		 * Don't read input, it is passed as function argument.
+		 * Return output and don't print it.
+	 	 * Taking input and printing output is handled automatically.
+		*/
+        HashMap<Integer,Boolean> h=new HashMap<>();
+        ArrayList<Integer> output = new ArrayList<>();
+        for(int i=0;i<arr.length;i++){
+                h.put(arr[i],true);
+        }
+        int maxlength = 0;
+        int start  = 0;
+        for(int i=0;i<arr.length;i++){
+            if(h.get(arr[i])){
+                int len=0;
+            	int temp=arr[i];
+                while(h.containsKey(temp)){
+                    len++;
+                    h.put(arr[i],false);
+                    temp++; 
+                }
+                int starttemp = arr[i];
+                temp = arr[i]-1;
+                while(h.containsKey(temp)){
+                    len++;
+                    h.put(arr[i],false);
+                    starttemp=temp;
+                    temp--; 
+                }
+                if(len>maxlength){
+                    maxlength=len;
+                    start=starttemp;
+                }
+                else if(len==maxlength){
+                    maxlength=len;
+                    for(int j=0;j<arr.length;j++){
+                        if(arr[j]==start)
+                        {
+                            start=start;
+                            break;
+                        }
+                        else if(arr[j]==starttemp){
+                            start=starttemp;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+        }
+        output.add(start);
+        output.add(start+maxlength-1);
+        return output;
+    }
+}
